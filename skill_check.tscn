@@ -1,0 +1,96 @@
+[gd_scene load_steps=6 format=3 uid="uid://cvkawvbs1omd"]
+
+[ext_resource type="Script" path="res://skill_check.gd" id="1_k7sd7"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_p6p8u"]
+keycode = 4194309
+
+[sub_resource type="Shortcut" id="Shortcut_14hff"]
+events = [SubResource("InputEventKey_p6p8u")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_skic3"]
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_2pigc"]
+events = [SubResource("InputEventKey_skic3")]
+
+[node name="SkillCheck" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_k7sd7")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+modulate = Color(1.5, 1.5, 1.5, 1)
+layout_mode = 2
+text = "ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM
+COPYRIGHT 2075-2077 ROBCO INDUSTRIES
+-Server 13-
+"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+modulate = Color(1.5, 1.5, 1.5, 1)
+layout_mode = 2
+text = "SKILL CHECK
+============================="
+
+[node name="Target" type="LineEdit" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+modulate = Color(1.5, 1.5, 1.5, 1)
+layout_mode = 2
+placeholder_text = "TARGET"
+
+[node name="Difficulty" type="LineEdit" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+modulate = Color(1.5, 1.5, 1.5, 1)
+layout_mode = 2
+placeholder_text = "DIFFICULTY"
+
+[node name="Dice" type="LineEdit" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+modulate = Color(1.5, 1.5, 1.5, 1)
+layout_mode = 2
+placeholder_text = "DICE"
+
+[node name="Complication" type="LineEdit" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+modulate = Color(1.5, 1.5, 1.5, 1)
+layout_mode = 2
+placeholder_text = "COMPLICATION RANGE"
+
+[node name="RunButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+modulate = Color(1.5, 1.5, 1.5, 1)
+layout_mode = 2
+shortcut = SubResource("Shortcut_14hff")
+text = "> Run"
+alignment = 0
+
+[node name="BackButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+shortcut = SubResource("Shortcut_2pigc")
+text = "> Back"
+alignment = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Log" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer"]
+layout_mode = 2
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/RunButton" to="." method="_on_run_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

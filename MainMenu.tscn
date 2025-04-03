@@ -1,0 +1,65 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2ydboepn2jra"]
+
+[ext_resource type="Script" path="res://MainMenu.gd" id="1_a0v2l"]
+
+[node name="MainMenu" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a0v2l")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+modulate = Color(1.5, 1.5, 1.5, 1)
+layout_mode = 2
+text = "ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM
+COPYRIGHT 2075-2077 ROBCO INDUSTRIES
+-Server 13-
+"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+modulate = Color(1.5, 1.5, 1.5, 1)
+layout_mode = 2
+text = "DICE ROLLING APPLICATION
+============================="
+
+[node name="SkillCheck" type="Button" parent="VBoxContainer"]
+modulate = Color(1.5, 1.5, 1.5, 1)
+layout_mode = 2
+text = "> Skill Check"
+alignment = 0
+
+[node name="Damage" type="Button" parent="VBoxContainer"]
+modulate = Color(1.5, 1.5, 1.5, 1)
+layout_mode = 2
+text = "> Damage"
+alignment = 0
+
+[node name="Generic" type="Button" parent="VBoxContainer"]
+modulate = Color(1.5, 1.5, 1.5, 1)
+layout_mode = 2
+text = "> Generic"
+alignment = 0
+
+[node name="Settings" type="Button" parent="VBoxContainer"]
+modulate = Color(1.5, 1.5, 1.5, 1)
+layout_mode = 2
+text = "> Settings"
+alignment = 0
+
+[node name="Shutdown" type="Button" parent="VBoxContainer"]
+modulate = Color(1.5, 1.5, 1.5, 1)
+layout_mode = 2
+text = "> Shutdown"
+alignment = 0
+
+[connection signal="pressed" from="VBoxContainer/SkillCheck" to="." method="_on_skill_check_pressed"]
+[connection signal="pressed" from="VBoxContainer/Damage" to="." method="_on_damage_pressed"]
+[connection signal="pressed" from="VBoxContainer/Generic" to="." method="_on_generic_pressed"]
+[connection signal="pressed" from="VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="VBoxContainer/Shutdown" to="." method="_on_shutdown_pressed"]

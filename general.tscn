@@ -1,0 +1,85 @@
+[gd_scene load_steps=6 format=3 uid="uid://x72vujcbda8u"]
+
+[ext_resource type="Script" path="res://general.gd" id="1_ylpkt"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_4iruf"]
+keycode = 4194309
+
+[sub_resource type="Shortcut" id="Shortcut_y3ist"]
+events = [SubResource("InputEventKey_4iruf")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_5sjo1"]
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_ct2j5"]
+events = [SubResource("InputEventKey_5sjo1")]
+
+[node name="General" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ylpkt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+modulate = Color(1.5, 1.5, 1.5, 1)
+layout_mode = 2
+text = "ROBCO INDUSTRIES UNIFIED OPERATING SYSTEM
+COPYRIGHT 2075-2077 ROBCO INDUSTRIES
+-Server 13-
+"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+modulate = Color(1.5, 1.5, 1.5, 1)
+layout_mode = 2
+text = "GENERAL DICE ROLL
+============================="
+
+[node name="Dice" type="LineEdit" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+modulate = Color(1.5, 1.5, 1.5, 1)
+layout_mode = 2
+placeholder_text = "DICE"
+
+[node name="Sides" type="LineEdit" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+modulate = Color(1.5, 1.5, 1.5, 1)
+layout_mode = 2
+placeholder_text = "SIDES"
+
+[node name="RunButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+modulate = Color(1.5, 1.5, 1.5, 1)
+layout_mode = 2
+shortcut = SubResource("Shortcut_y3ist")
+text = "> Run"
+alignment = 0
+
+[node name="BackButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+modulate = Color(1.5, 1.5, 1.5, 1)
+layout_mode = 2
+shortcut = SubResource("Shortcut_ct2j5")
+text = "> Back"
+alignment = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Log" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/RunButton" to="." method="_on_run_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

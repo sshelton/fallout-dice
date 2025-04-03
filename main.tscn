@@ -1,0 +1,84 @@
+[gd_scene load_steps=14 format=3 uid="uid://s6xd32dwd71n"]
+
+[ext_resource type="Theme" uid="uid://bbxddii2karr0" path="res://terminal_theme.tres" id="1_vwbnb"]
+[ext_resource type="Script" path="res://main.gd" id="2_ug8od"]
+[ext_resource type="PackedScene" uid="uid://tdve2p2ratdd" path="res://damage.tscn" id="3_88gd6"]
+[ext_resource type="Texture2D" uid="uid://ci32i644ic76q" path="res://light.png" id="4_6dcpj"]
+[ext_resource type="AudioStream" uid="uid://3fg3kywkhqmw" path="res://computer.wav" id="5_afltr"]
+[ext_resource type="Script" path="res://PointLight2D.gd" id="5_qiosf"]
+[ext_resource type="Shader" path="res://main.gdshader" id="5_to5r2"]
+[ext_resource type="Texture2D" uid="uid://bg0l3uyugih5i" path="res://bezel.png" id="6_yn0q0"]
+
+[sub_resource type="Gradient" id="Gradient_hnpde"]
+offsets = PackedFloat32Array(0.135484, 1)
+colors = PackedColorArray(0.194349, 0.194349, 0.194349, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hgcbn"]
+noise_type = 4
+seed = 1337
+frequency = 0.45
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xv65h"]
+color_ramp = SubResource("Gradient_hnpde")
+noise = SubResource("FastNoiseLite_hgcbn")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fpdqo"]
+shader = ExtResource("5_to5r2")
+shader_parameter/scan_line_count = 120.0
+
+[sub_resource type="Environment" id="Environment_x2pif"]
+resource_local_to_scene = true
+background_mode = 3
+background_color = Color(1, 1, 1, 1)
+background_canvas_max_layer = 1
+tonemap_mode = 2
+glow_enabled = true
+glow_bloom = 0.05
+glow_blend_mode = 0
+
+[node name="Main" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_vwbnb")
+script = ExtResource("2_ug8od")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 80
+
+[node name="Damage" parent="MarginContainer" instance=ExtResource("3_88gd6")]
+layout_mode = 2
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 1.2
+blend_mode = 2
+texture = ExtResource("4_6dcpj")
+offset = Vector2(640, 512)
+script = ExtResource("5_qiosf")
+noise = SubResource("NoiseTexture2D_xv65h")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_fpdqo")
+layout_mode = 2
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("6_yn0q0")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_x2pif")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_afltr")
+
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

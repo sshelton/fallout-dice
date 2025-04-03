@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://clbw3xceesewr"]
+
+[ext_resource type="Script" path="res://boot.gd" id="1_ilgkn"]
+[ext_resource type="Theme" uid="uid://bbxddii2karr0" path="res://terminal_theme.tres" id="1_sg8jd"]
+
+[node name="Panel" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_sg8jd")
+script = ExtResource("1_ilgkn")
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(1.5, 1.5, 1.5, 1)
+layout_mode = 2
+size_flags_vertical = 1
+text = "WELCOME TO ROBCO INDUSTRIES (TM) TERMLINK
+
+>SET TERMINAL/INQUIRE
+
+RIT-V300
+
+>SET FILE/PROTECTION=OWNER:RWED ACCOUNTS.F
+>SET HALT RESTART/MAINT
+
+Intializing Robco Industries(TM) MF Boot Agent v2.3.0
+RETROS BIOS
+RBIOS-4.02.08.00 52EE5.E7.E8
+Copyright 2075-2077 Robco Ind.
+Uppermem: 64 KB
+Root (5A8)
+Maintenance Mode
+
+>RUN DEBUG/ACCOUNTS.F"
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="StartTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="OutTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="timeout" from="OutTimer" to="." method="_on_out_timer_timeout"]
